@@ -44,3 +44,12 @@ class BinaryHeap(object):
             return max
         except IndexError:
             print("The Priority Queue is empty! There is no max!")
+            
+    def sort(self):
+        while self.n > 1:
+            self.exch(1, self.n)
+            self.n -= 1
+            self.sink(1)
+        
+        return [self.pq[i] for i in range(1, len(self.pq))]
+    
