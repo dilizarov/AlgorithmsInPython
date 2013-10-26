@@ -1,5 +1,5 @@
 import random
-    
+
 def uniform_shuffle(arr):
     for i in range(0,len(arr)):
         r = random.randrange(0, i+1)

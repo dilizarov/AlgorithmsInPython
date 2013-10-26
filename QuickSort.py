@@ -42,8 +42,6 @@ class QuickSort(object):
             arr[rand] = arr[i]
             arr[i] = swap
         
-        print arr
-        
         cls.privateSort(arr, 0, len(arr) - 1)
         return arr
         
@@ -56,3 +54,8 @@ class QuickSort(object):
         j = cls.partition(arr, low, high)
         cls.privateSort(arr, low, j-1)
         cls.privateSort(arr, j+1, high)
+        
+if __name__ == "__main__":
+    import sys
+    a = [int(x) for x in sys.argv[1].split(",")]
+    print(QuickSort.sort(a))
