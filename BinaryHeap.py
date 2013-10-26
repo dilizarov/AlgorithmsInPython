@@ -1,7 +1,7 @@
 class BinaryHeap(object):
     
     def __init__(self):
-        self.pq = [None]
+        self.pq = [None] #The heap is an index 1-based heap.
         self.n = 0 #n = no. of elements
         
     def isEmpty(self):
@@ -43,7 +43,7 @@ class BinaryHeap(object):
             self.sink(1)
             return max
         except IndexError:
-            print("The Priority Queue is empty! There is no max!")
+            print("The Binary Heap is empty! There is no max!")
             
     def sort(self):
         while self.n > 1:
