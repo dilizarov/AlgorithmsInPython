@@ -3,6 +3,9 @@ import java.util.NoSuchElementException
 public class BST<Key extends Comparable<Key>, Value> {
   private Node root; //The root of the BST
   
+  //Many recursive solutions. Iterative approach simple:
+  //Replace recursion with while loops.
+  
   private class Node {
     private Key key;
     private Value val;
@@ -59,6 +62,8 @@ public class BST<Key extends Comparable<Key>, Value> {
     root = put(root, key, val);
   }
   
+  //Could refactor to use min(), max() functions.
+  
   private Node deleteMin(Node x) {
     if (x.left == null) return x.right;
     x.left = deleteMin(x.left);
@@ -83,6 +88,26 @@ public class BST<Key extends Comparable<Key>, Value> {
     root = deleteMax(root);
   }
   
+  public Key min() {
+    if (isEmpty()) return null;
+    return min(root).key;
+  }
+  
+  private Node min(Node x) {
+    if (x.left == null) return x;
+    else return min(x.left);
+  }
+  
+  public Key max() {
+    if (isEmpty()) return null;
+    return max(root).key;
+  }
+  
+  private Node max(Node x) {
+    if (x.right == null) return x;
+    else return max(x.right);
+  }
+  
   private Node delete(Node x, Key key) {
     if (x == null) return null;
     int comparator = key.compareTo(x.key);
@@ -91,7 +116,13 @@ public class BST<Key extends Comparable<Key>, Value> {
     else {
       if (x.right == null) return x.left;
       if (x.left == null) return x.right;
-      
+      Node temp = x;
+      x = min(temp.right);
+      x.right = deleteMin(temp.right);
+      x.left = temp.left;
     }
+    
+    x.N = size(x.left) + size(x.right) + 1;
+    return x;
   }
 }
