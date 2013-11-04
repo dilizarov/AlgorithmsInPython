@@ -58,7 +58,7 @@ class RedBlackBST(object):
         if val == None:
             self.delete(key)
             return
-        root = _put(root, key, val)
+        self._root = _put(self._root, key, val)
     
     @staticmethod        
     def _put(node, key, val):
@@ -72,6 +72,42 @@ class RedBlackBST(object):
         node.n = 1 + _size(node.left) + _size(node.right)
         return node
     
+    def delete_min(self):
+        if self.is_empty(): raise IndexError
+        self._root = _delete_min(self._root)
+        
+    @staticmethod
+    def _delete_min(node):
+        if node.left == None: return node.right
+        node.left = _delete_min(node.left)
+        node.n = _size(node.left) + _size(node.right) + 1
+        return node
+    
+    def delete_max(self):
+        if self.is_empty(): raise IndexError
+        self._root = _delete_max(self._root)
+    
+    @staticmethod
+    def _delete_max(node):
+        if node.right == None: return node.left
+        node.right = _delete_max(node.right)
+        node.n = _size(node.left) + _size(node.right) + 1
+        return node
+    
+    def delete(self, key):
+        self._root = _delete(self._root, key)
+        
+    @staticmethod
+    def _delete(node, key):
+        if node == None: return None
+        if node.key < key:
+            node.left = _delete(node.left, key)
+        elif node.key > key:
+            node.right = _delete(node.right, key)
+        else:
+            
+        node.n = _size(node.left) + _size(node.right) + 1
+        return node
     
     
     
