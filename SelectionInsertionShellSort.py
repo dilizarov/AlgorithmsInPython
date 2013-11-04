@@ -37,6 +37,6 @@ def shell_sort(arr):
                     arr[j] = swap
                 else:
                     break
-        h = h/3
+        h = h//3
     
     return arr
